@@ -25,7 +25,7 @@ class ToolRegistry:
     def get_openai_tools(self) -> List[Dict[str, Any]]:
         return [tool.get_tools() for tool in self._tools.values()]
     
-    def auto_discover_tools(self, tools_dir: str = "tools/default") -> None:
+    def auto_discover_tools(self, tools_dir: str = "tools/calendar") -> None:
         tools_path = Path(tools_dir)
         if not tools_path.exists():
             console.print(f"[yellow]Warning:[/yellow] Tools directory '{tools_dir}' not found")
@@ -35,7 +35,7 @@ class ToolRegistry:
             if py_file.name.startswith("__"):
                 continue
             
-            module_name = f"tools.default.{py_file.stem}"
+            module_name = f"tools.calendar.{py_file.stem}"
             try:
                 module = importlib.import_module(module_name)
                 
